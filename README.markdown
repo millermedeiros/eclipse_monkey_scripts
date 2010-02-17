@@ -22,6 +22,9 @@ Now you should see a new item called "Scripts" on the Eclipse menu and also have
 *	[Creating a new Eclipse Monkey script](http://docs.aptana.com/docs/index.php/Creating_a_new_Eclipse_Monkey_script)
 *	[Adding metadata to an Eclipse Monkey script](http://docs.aptana.com/docs/index.php/Adding_metadata_to_an_Eclipse_Monkey_script)
 
+## Syntax Reference ##
+
+*	<http://wiki.eclipse.org/Eclipse_Monkey/Javascript_Editor>
 
 ## Important ##
 
