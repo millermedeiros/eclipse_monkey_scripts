@@ -10,18 +10,23 @@ function main() {
 	if(editors.activeEditor !== undefined){
 	
 			var activeEditor = editors.activeEditor,
+				selectionRange = activeEditor.selectionRange,
+				startingOffset = selectionRange.startingOffset,
+				endingOffset = selectionRange.endingOffset,
+				deleteLength = endingOffset - startingOffset,
 				source = activeEditor.source,
-				output = '';
+				selected = source.substring(startingOffset, endingOffset),
+				output ='';
 				
 			//apply transformations
-			output = source.replace(/<!--[\s\S]*-->/g, '') //strip comments
+			output = selected.replace(/<!--[\s\S]*-->/g, '') //strip comments
 							.replace(/\t+/g, '') //remove tabs
 							.replace(/\r|\n/g, '') //remove line breaks
 							.replace(/<!DOCTYPE[^>]*>/gi, '$&\n'); //add line break after doctype
 			
 			// apply edit and reveal in editor
-			activeEditor.applyEdit(0, source.length, output);
-			activeEditor.selectAndReveal(0, output.length);
+			activeEditor.applyEdit(startingOffset, deleteLength, output);
+			activeEditor.selectAndReveal(startingOffset, output.length);
 	
 	} else{	
 		showError("No active editor");

@@ -1,5 +1,5 @@
 /*
- * Menu: MillerMedeiros > HTML > Convert to HTML 4.0 entity
+ * Menu: MillerMedeiros > HTML > Encode HTML 4.0 entities
  * Kudos: Miller Medeiros (www.millermedeiros.com)
  * License: MIT
  * DOM: http://download.eclipse.org/technology/dash/update/org.eclipse.eclipsemonkey.lang.javascript
