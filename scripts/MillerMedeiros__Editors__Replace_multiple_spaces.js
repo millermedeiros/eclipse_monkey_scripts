@@ -1,5 +1,5 @@
 /*
- * Menu: MillerMedeiros > Editors > Remove Multiple Spaces
+ * Menu: MillerMedeiros > Editors > Replace Multiple Spaces
  * Kudos: Miller Medeiros (www.millermedeiros.com)
  * License: MIT
  * DOM: http://download.eclipse.org/technology/dash/update/org.eclipse.eclipsemonkey.lang.javascript
@@ -19,7 +19,8 @@ function main() {
 				output = '';
 				
 			//apply transformations
-			output = selected.replace(/ {2,}/g, " ");
+			var replacement = prompt('Replace with:', '');
+			output = selected.replace(/ {2,}/g, replacement);
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);

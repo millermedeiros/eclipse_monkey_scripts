@@ -1,5 +1,5 @@
 /*
- * Menu: MillerMedeiros > Editors > Remove Line Breaks
+ * Menu: MillerMedeiros > Editors > Remove Empty Lines
  * Kudos: Miller Medeiros (www.millermedeiros.com)
  * License: MIT
  * DOM: http://download.eclipse.org/technology/dash/update/org.eclipse.eclipsemonkey.lang.javascript
@@ -19,7 +19,7 @@ function main() {
 				output = '';
 				
 			//apply transformations
-			output = selected.replace(/\n|\r/g, " ");
+			output = selected.replace(/^\s*\r?\n/gm, '');
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);
