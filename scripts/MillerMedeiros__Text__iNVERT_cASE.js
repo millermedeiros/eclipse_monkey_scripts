@@ -1,5 +1,5 @@
 /*
- * Menu: MillerMedeiros > Editors > To Camel Case
+ * Menu: MillerMedeiros > Text > iNVERT cASE
  * Kudos: Miller Medeiros (www.millermedeiros.com)
  * License: MIT
  * DOM: http://download.eclipse.org/technology/dash/update/org.eclipse.eclipsemonkey.lang.javascript
@@ -18,17 +18,17 @@ function main() {
 				selected = source.substring(startingOffset, endingOffset),
 				output = '';
 				
+			var upperRegex = new RegExp('[A-Z\xC0-\xDF]'); 
+			
 			//apply transformations
-			function toProperCase(str){
-				return str.toLowerCase().replace(/^[a-z\xE0-\xFF]|\s[a-z\xE0-\xFF]/g, function(){
-					return arguments[0].toUpperCase(); //replace first char of each word to UPPERCASE
-				});
+			function capsFn(curChar){
+				if(upperRegex.test(curChar)){
+					return curChar.toLowerCase();
+				} else {
+					return curChar.toUpperCase();
+				}
 			}
-			output = selected.replace('-', ' ');
-			output = toProperCase(output).replace(/\s+/g, '');
-			output = output.replace(/^[a-zA-Z\xE0-\xFF]/g, function(){
-				return arguments[0].toLowerCase(); // lowercase first letter
-			});
+			output = selected.replace(/[a-zA-Z\xC0-\xFF]/g, capsFn); //lowercase <-> UPPERCASE
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);
