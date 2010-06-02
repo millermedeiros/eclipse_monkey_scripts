@@ -59,7 +59,7 @@ function main() {
 			}
 			
 			//apply transformations
-			output = selected.replace(/[^a-zA-Z\xC0-\xFF \-]/g, ''); //remove non-word chars
+			output = selected.replace(/[^0-9a-zA-Z\xC0-\xFF \-]/g, ''); //remove non-word chars
 			output = output.replace('-', ' ', 'g'); //replace hyphens
 			output = output.toLowerCase().replace(/^[a-z\xE0-\xFF]|\s[a-z\xE0-\xFF]/g, upperFn); //convert first char of each word to UPPERCASE
 			output = output.replace(/\s+/g, ''); //remove spaces

@@ -50,7 +50,7 @@ function main() {
 				return str;
 			}
 			
-			output = selected.replace(/[^a-zA-Z\xC0-\xFF \-]/g, ''); //remove non-word chars
+			output = selected.replace(/[^0-9a-zA-Z\xC0-\xFF \-]/g, ''); //remove non-word chars
 			output = output.replace(/([a-z\xE0-\xFF])([A-Z\xC0\xDF])/g, '$1 $2'); //add space between camelCase text
 			output = output.replace(/ +/g, '-'); //replace spaces with hyphen
 			output = output.toLowerCase();
