@@ -1,10 +1,10 @@
 /*
- * Menu: MillerMedeiros > Editors > Replace Multiple Spaces
+ * Menu: MillerMedeiros > JavaScript > Remove multi line comments
  * Kudos: Miller Medeiros (www.millermedeiros.com)
  * License: MIT
  * DOM: http://download.eclipse.org/technology/dash/update/org.eclipse.eclipsemonkey.lang.javascript
  */
- 
+
 function main() {
  
 	if(editors.activeEditor !== undefined){
@@ -19,8 +19,7 @@ function main() {
 				output = '';
 				
 			//apply transformations
-			var replacement = prompt('Replace with:', ' ');
-			output = selected.replace(/ {2,}/g, replacement);
+			output = selected.replace(/\/\*[\s\S]+?(?:\*\/)/g, ''); //everything between "/* */"
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);
