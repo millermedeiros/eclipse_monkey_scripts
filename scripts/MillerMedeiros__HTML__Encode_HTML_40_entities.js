@@ -19,9 +19,14 @@ function main() {
 				output ='';
 				
 			//apply transformations
-			//entities copied from Wikipedia ( http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references#Character_entity_references_in_HTML )
-			output = selected
-							.replace(/\u0026([a-z]+;)?/g, function($0, $1){
+			
+			/**
+			 * encode special chars
+			 */
+			function entityEncode(str){
+				//entities copied from Wikipedia ( http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references#Character_entity_references_in_HTML )
+				return str
+							.replace(/\u0026([a-zA-Z]+;)?/g, function($0, $1){
 								return $1? $0 : "&amp;"; //make sure it only replace '&' if it isn't an HTML entity already
 							})
 							.replace(/\u0022/g, "&quot;")
@@ -276,6 +281,34 @@ function main() {
 							.replace(/\u2663/g, "&clubs;")
 							.replace(/\u2665/g, "&hearts;")
 							.replace(/\u2666/g, "&diams;");
+			}
+			
+			/**
+			 * @return {string}
+			 */
+			function htmlEntityEncode(str, ignoreHtmlTags){
+				var 
+					tmpArr,
+					tagPattern = /(<[^>]+>)/g, //will match XML tags. capturing group is required for split.
+					i,
+					n;
+				
+				if (! ignoreHtmlTags){
+					return entityEncode(str);
+				}else{
+					tmpArr = str.split(tagPattern);
+					n = tmpArr.length;
+					for(i = 0; i < n; i++){
+						tmpArr[i] = tagPattern.test(tmpArr[i])? tmpArr[i] : entityEncode(tmpArr[i]); //keep html tags, encode regular string
+					}
+					return tmpArr.join('');
+				}
+				
+			}
+			
+			var ignoreHTML = !!parseInt( prompt('Ignore HTML Tags (1|0):', '0') );
+			
+			output = htmlEntityEncode(selected, ignoreHTML);
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);
