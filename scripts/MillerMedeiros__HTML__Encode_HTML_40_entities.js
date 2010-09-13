@@ -20,7 +20,10 @@ function main() {
 				
 			//apply transformations
 			//entities copied from Wikipedia ( http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references#Character_entity_references_in_HTML )
-			output = selected.replace(/\u0026/g, "&amp;") // &amp; should always be the first otherwise it won't work properly.
+			output = selected
+							.replace(/\u0026([a-z]+;)?/g, function($0, $1){
+								return $1? $0 : "&amp;"; //make sure it only replace '&' if it isn't an HTML entity already
+							})
 							.replace(/\u0022/g, "&quot;")
 							.replace(/\u0027/g, "&apos;")
 							.replace(/\u003C/g, "&lt;")

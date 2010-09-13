@@ -27,35 +27,37 @@ function main() {
 			function replaceAccents(str) {
 				// verifies if the String has accents and replace accents
 				if (str.search(/[\xC0-\xFF]/g) > -1) {
-					str = str.replace(/[\xC0-\xC5]/g, "A");
-					str = str.replace(/[\xC6]/g, "AE");
-					str = str.replace(/[\xC7]/g, "C");
-					str = str.replace(/[\xC8-\xCB]/g, "E");
-					str = str.replace(/[\xCC-\xCF]/g, "I");
-					str = str.replace(/[\xD0]/g, "D");
-					str = str.replace(/[\xD1]/g, "N");
-					str = str.replace(/[\xD2-\xD6\xD8]/g, "O");
-					str = str.replace(/[\xD9-\xDC]/g, "U");
-					str = str.replace(/[\xDD]/g, "Y");
-					str = str.replace(/[\xDE]/g, "P");
-					str = str.replace(/[\xE0-\xE5]/g, "a");
-					str = str.replace(/[\xE6]/g, "ae");
-					str = str.replace(/[\xE7]/g, "c");
-					str = str.replace(/[\xE8-\xEB]/g, "e");
-					str = str.replace(/[\xEC-\xEF]/g, "i");
-					str = str.replace(/[\xF1]/g, "n");
-					str = str.replace(/[\xF2-\xF6\xF8]/g, "o");
-					str = str.replace(/[\xF9-\xFC]/g, "u");
-					str = str.replace(/[\xFE]/g, "p");
-					str = str.replace(/[\xFD\xFF]/g, "y");
+					str = str
+							.replace(/[\xC0-\xC5]/g, "A")
+							.replace(/[\xC6]/g, "AE")
+							.replace(/[\xC7]/g, "C")
+							.replace(/[\xC8-\xCB]/g, "E")
+							.replace(/[\xCC-\xCF]/g, "I")
+							.replace(/[\xD0]/g, "D")
+							.replace(/[\xD1]/g, "N")
+							.replace(/[\xD2-\xD6\xD8]/g, "O")
+							.replace(/[\xD9-\xDC]/g, "U")
+							.replace(/[\xDD]/g, "Y")
+							.replace(/[\xDE]/g, "P")
+							.replace(/[\xE0-\xE5]/g, "a")
+							.replace(/[\xE6]/g, "ae")
+							.replace(/[\xE7]/g, "c")
+							.replace(/[\xE8-\xEB]/g, "e")
+							.replace(/[\xEC-\xEF]/g, "i")
+							.replace(/[\xF1]/g, "n")
+							.replace(/[\xF2-\xF6\xF8]/g, "o")
+							.replace(/[\xF9-\xFC]/g, "u")
+							.replace(/[\xFE]/g, "p")
+							.replace(/[\xFD\xFF]/g, "y");
 				}
 				return str;
 			}
 			
-			output = selected.replace(/[^0-9a-zA-Z\xC0-\xFF \-]/g, ''); //remove non-word chars
-			output = output.replace(/([a-z\xE0-\xFF])([A-Z\xC0\xDF])/g, '$1 $2'); //add space between camelCase text
-			output = output.replace(/ +/g, '-'); //replace spaces with hyphen
-			output = output.toLowerCase();
+			output = selected
+							.replace(/[^0-9a-zA-Z\xC0-\xFF \-]/g, '') //remove non-word chars
+							.replace(/([a-z\xE0-\xFF])([A-Z\xC0\xDF])/g, '$1 $2') //add space between camelCase text
+							.replace(/ +/g, '-') //replace spaces with hyphen
+							.toLowerCase();
 			output = replaceAccents(output);
 			
 			// apply edit and reveal in editor
