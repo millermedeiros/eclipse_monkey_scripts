@@ -19,7 +19,7 @@ function main() {
 				
 			//apply transformations
 			var tag = prompt('Tag:', 'p');
-			output = selected.replace(/([^\t\n\r]+)([\n\r]+|$)/g, '<'+ tag +'>$1</'+ tag +'>$2');
+			output = (tag)? selected.replace(/([^\t\n\r]+)([\n\r]+|$)/g, '<'+ tag +'>$1</'+ tag +'>$2') : selected;
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);

@@ -19,7 +19,7 @@ function main() {
 				output = '';
 				
 			//apply transformations
-			var replacement = prompt('Replace with:', '');
+			var replacement = prompt('Replace with:', '') || '';
 			output = selected.replace(/\r?\n/g, replacement);
 			
 			// apply edit and reveal in editor
