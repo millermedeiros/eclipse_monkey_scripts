@@ -17,15 +17,21 @@ function main() {
 				source = activeEditor.source,
 				selected = source.substring(startingOffset, endingOffset),
 				output = '';
-				
+			
+			var keepLines = !!parseInt( prompt('Keep line breaks? (1|0):', '0') );
+			
 			//apply transformations
 			output = selected.replace(/\/\*[\s\S]+?(?:\*\/)/g, "") //everything between "/* */" (comments)
 							.replace(/\t+/g, "") //tabs
-							.replace(/\s{2,}/g, " ") //multiple spaces
-							.replace(/\s?([,\{\};\:])\s?/g, "$1") //spaces around ",;{}:" (should come after multiple spaces regexp)
-							.replace(/\r?\n/g, "") //new lines
+							.replace(/ {2,}/g, " ") //multiple spaces
+							.replace(/ ?([,\{\};\:]) ?/g, "$1") //spaces around ",;{}:" (should come after multiple spaces regexp)
+							.replace(/^\s*\r?\n/gm, "") //empty lines
 							.replace(/;\}/g, "}") //";" just before "}"
-							.replace(/(\:|\,|\s|\(|\-)0\./g, "$1."); //remove leading zero on fractional number smaller than 1
+							.replace(/(\:|\,| |\(|\-)0\./g, "$1."); //remove leading zero on fractional number smaller than 1
+			
+			if(!keepLines){
+				output = output.replace(/\r?\n/g, '');
+			}
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);
