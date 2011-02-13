@@ -19,11 +19,13 @@ function main() {
 				output = '';
 				
 			//apply transformations
-			output = selected.replace(/\/\*[\s\S]+?(?:\*\/)/g, "") //everything between "/* */"
+			output = selected.replace(/\/\*[\s\S]+?(?:\*\/)/g, "") //everything between "/* */" (comments)
 							.replace(/\t+/g, "") //tabs
 							.replace(/\s{2,}/g, " ") //multiple spaces
 							.replace(/\s?([,\{\};\:])\s?/g, "$1") //spaces around ",;{}:" (should come after multiple spaces regexp)
-							.replace(/\r?\n/g, ""); //new lines
+							.replace(/\r?\n/g, "") //new lines
+							.replace(/;\}/g, "}") //";" just before "}"
+							.replace(/(\:|\,|\s|\(|\-)0\./g, "$1."); //remove leading zero on fractional number smaller than 1
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);
