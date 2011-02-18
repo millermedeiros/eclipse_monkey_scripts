@@ -18,7 +18,7 @@ function main() {
 				selected = source.substring(startingOffset, endingOffset),
 				output = '';
 			
-			var keepLines = !!parseInt( prompt('Keep line breaks? (1|0):', '0') );
+			var keepLines = !!parseInt( prompt('Line breaks after each rule? (1|0):', '0') );
 			
 			//apply transformations
 			output = selected.replace(/\/\*[\s\S]+?(?:\*\/)/g, "") //everything between "/* */" (comments)
@@ -27,10 +27,12 @@ function main() {
 							.replace(/ *([,\{\};\:]) */g, "$1") //spaces around ",;{}:" (should come after multiple spaces regexp)
 							.replace(/^\s*\r?\n/gm, "") //empty lines
 							.replace(/;\}/g, "}") //";" just before "}"
-							.replace(/(\:|\,| |\(|\-)0\./g, "$1."); //remove leading zero on fractional number smaller than 1
+							.replace(/(\:|\,| |\(|\-)0\./g, "$1.") //remove leading zero on fractional number smaller than 1
+							.replace(/[\n\r]+/gm, ""); //remove line breaks
 			
-			if(!keepLines){
-				output = output.replace(/[\r\n]+/gm, '');
+			if(keepLines){
+				output = output.replace(/\}/g, '}\n')
+				                .replace(/\}\n$/, '}'); //remove last line break
 			}
 			
 			// apply edit and reveal in editor
