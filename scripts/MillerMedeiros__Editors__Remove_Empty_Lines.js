@@ -19,7 +19,7 @@ function main() {
 				output = '';
 				
 			//apply transformations
-			output = selected.replace(/^\s*\r?\n/gm, '');
+			output = selected.replace(/^\s*[\r\n]+/gm, '');
 			
 			// apply edit and reveal in editor
 			activeEditor.applyEdit(startingOffset, deleteLength, output);
